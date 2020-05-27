@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class p11053 {
@@ -7,25 +6,20 @@ public class p11053 {
 		Scanner in = new Scanner(System.in);	
 		int n = in.nextInt();
 		int array[] = new int[n];
+		int dp[] = new int[n];
 		for(int i = 0; i < n; i++) {
 			array[i] = in.nextInt();
+			dp[i] = 1;
 		}
-		
-		int max = 0;
-		
-		for(int i = 0; i < 1; i++) {
-			int num = array[i];
-			int count = 1;
-			for(int j = i + 1; j < n; j++) {
-				if(num < array[j]) {
-					count ++;
-					num = array[j];
-					System.out.println(num);
-				}
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j <= i; j++) {
+				if(array[i] > array[j] && dp[i] <= dp[j])
+					dp[i] = dp[j] + 1;
 			}
-			max = Math.max(max, count);
 		}
-			
+		int max = 0;
+		for(int i : dp)
+			max = Math.max(i, max);
 		System.out.println(max);
 	}
 
