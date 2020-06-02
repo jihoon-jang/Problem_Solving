@@ -6,9 +6,10 @@ public class p2739 {
 	{
 		Scanner in = new Scanner(System.in);
 		int number = in.nextInt();
-		for(int i = 0; i < 9 ; i++)
+		
+		for(int i = 1; i <= 9 ; i++)
 		{
-			System.out.println(number +" * "+(i+1)+" = "+number*(i+1));
+			System.out.println(number + " * " + i + " = " + (number*i));
 		}
 	}
 }
