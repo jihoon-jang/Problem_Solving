@@ -10,7 +10,7 @@ public class p1018 {
 			String s = in.nextLine();
 			map[i] = s.toCharArray();
 		}
-		int answer = 0;
+		int answer = Integer.MAX_VALUE;
 
 		char white[][] = new char[m][n];
 		char c = 'W';
@@ -43,23 +43,24 @@ public class p1018 {
 			}
 		}
 
-		for(int i = 0; i < m; i++) {
-			for(int j = 0; j < n; j++) {
-				if(map[i][j] != white[i][j])
-					answer ++;
+		int w, b;
+		for(int i = 0; i <= m-8; i++) {
+			for(int j = 0; j <= n-8; j++) {
+				
+				w = b = 0;
+				for(int k = 0; k < 8; k++) {
+					for(int l = 0; l < 8; l++) {
+						if(map[i+k][j+l] != white[k][l])
+							w ++;
+						if(map[i+k][j+l] != black[k][l])
+							b ++;						
+					}
+				}
+				answer = Math.min(w, Math.min(answer, b));
 			}
 		}
-		int temp = 0;
-		for(int i = 0; i < m; i++) {
-			for(int j = 0; j < n; j++) {
-				if(map[i][j] != black[i][j])
-					temp ++;
-			}
-		}
-		if(answer < temp)
-			System.out.println(answer);
-		else 
-			System.out.println(temp);
+
+		System.out.println(answer);
 	}
 
 }
