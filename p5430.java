@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.LinkedList;
+import java.util.*;
 
 
 public class p5430 {
@@ -12,12 +12,11 @@ public class p5430 {
 		l:	for(int t = 0; t < tc; t++) {
 			String command = br.readLine();
 			int n = Integer.parseInt(br.readLine());
-			LinkedList<Integer> ll = new LinkedList<Integer>();
-			StringBuilder sb = new StringBuilder();
-			sb.append(br.readLine());
-			sb.deleteCharAt(sb.length()-1);
-			sb.deleteCharAt(0);
-			String s[] = sb.toString().split(",");
+			List<Integer> ll = new ArrayList<Integer>();
+			String number = br.readLine();
+			number = number.replace("[", "");
+			number = number.replace("]", "");
+			String s[] = number.split(",");
 			for(int i = 0; i < n; i++)
 				ll.add(Integer.parseInt(s[i]));
 			
@@ -25,18 +24,23 @@ public class p5430 {
 			for(int i = 0; i < command.length(); i++) {
 				char c = command.charAt(i);
 				if(c == 'D' && ll.size() == 0) {
-					bw.write("error");
+					bw.write("error\n");
 					continue l;
 				}
 				switch(c) {
-				case 'D':if(first) ll.removeFirst(); else ll.removeLast(); break;
+				case 'D':if(first) ll.remove(0); else ll.remove(ll.size()-1); break;
 				case 'R':if(first) first = false; else  first = true; break;
 				}
 			}
 			
-			sb = new StringBuilder();
+			StringBuilder sb = new StringBuilder();
 			if(first) {
 				sb.append("[");
+
+				System.out.println(ll.iterator().toString());
+				
+				
+				
 				for(int i = 0; i < ll.size(); i++) 
 					sb.append(ll.get(i)+",");
 				sb.deleteCharAt(sb.length()-1);
@@ -52,6 +56,7 @@ public class p5430 {
 			
 			bw.write(sb.length() == 2? "[]\n":sb.toString());
 		}
+		bw.flush();
 	}
 
 }
