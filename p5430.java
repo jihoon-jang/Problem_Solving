@@ -35,11 +35,7 @@ public class p5430 {
 			
 			StringBuilder sb = new StringBuilder();
 			if(first) {
-				sb.append("[");
-
-				System.out.println(ll.iterator().toString());
-				
-				
+				sb.append("[");			
 				
 				for(int i = 0; i < ll.size(); i++) 
 					sb.append(ll.get(i)+",");
