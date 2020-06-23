@@ -31,6 +31,7 @@ public class p1389 {
 				value = i;
 			}
 		}
+		System.out.println(value);
 	}
 
 }
