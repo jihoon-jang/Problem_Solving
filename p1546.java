@@ -1,26 +1,24 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.util.*;
 
 public class p1546 {
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int loop = Integer.parseInt(br.readLine());
-		String line = br.readLine();
-		String[] s = line.split(" ");
+	public static void main(String[] args){
+		Scanner in = new Scanner(System.in);
+		int loop = in.nextInt();
+		double array[] = new double[loop];
+		double max = 0;
 		
-		int max = 0;
-		int sum = 0;
-		for(int i = 0; i < s.length; i++)
-		{
-			sum += Integer.parseInt(s[i]);
-			if(Integer.parseInt(s[i]) > max)
-				max = Integer.parseInt(s[i]);
+		for(int i = 0; i < loop; i++) {
+			array[i] = in.nextInt();
+			max = Math.max(max, array[i]);
 		}
-		System.out.println(((double)sum / (double)max) *100/s.length);
+
+		double sum = 0;
+		for(int i = 0; i < loop; i++) {
+			array[i] /= max;
+			sum += array[i];
+		}
+		System.out.println(sum/loop*100);
 	}
 
 }
