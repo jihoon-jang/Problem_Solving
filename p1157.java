@@ -24,7 +24,7 @@ public class p1157 {
 			else if(max == alphabet[i]) 
 				index = "?";
 		}
-		//
+		
 		System.out.println(index.equals("?") ? "?" : (char)('A'+Integer.parseInt(index)));
 		
 	}
