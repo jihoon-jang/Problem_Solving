@@ -9,8 +9,10 @@ public class p10872 {
 		int n = Integer.parseInt(br.readLine());
 		
 		int fib = 1;
+		
 		for(int i = 1; i <= n; i++)
 			fib *= i;
+		
 		System.out.println(fib);
 	}
 
