@@ -13,7 +13,7 @@ public class p1929 {
 			for(int j = 2; i*j <= 1000000; j++)
 				array[i*j] = 1;
 		}
-		
+		//
 		for(int i = m; i <= n; i++)
 			if(array[i] == 0)
 				System.out.println(i);
