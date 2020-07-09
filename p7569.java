@@ -43,7 +43,7 @@ public class p7569 {
 				}
 			}
 			q.add(new coor(-1, -1, -1));
-//
+
 			while(!q.isEmpty()) {
 				coor c = q.poll();
 				if(c.k == -1) {
