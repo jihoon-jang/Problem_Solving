@@ -1,53 +1,27 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.*;
 
 public class p2751 {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		//        boolean[] a = new boolean[2000001];
-		//        int n = Integer.parseInt(br.readLine());
-		//
-		//        for(int i=0; i<n; i++)
-		//            a[Integer.parseInt(br.readLine()+1000000)] = true;
-		boolean[] a = new boolean[2000001];
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
 		int n = Integer.parseInt(br.readLine());
-
-		for(int i=0; i<n; i++)
-			a[Integer.parseInt(br.readLine()) + 1000000] = true;
-
+		ArrayList<Integer> al = new ArrayList<Integer>();
 		StringBuilder sb = new StringBuilder();
-
-		for(int i=0; i<=2000000; i++)
-			if(a[i])
-				sb.append((i - 1000000) + "\n");
-
-		System.out.print(sb);
-
+		
+		for(int i = 0; i < n; i++)
+			al.add(Integer.parseInt(br.readLine()));
+		
+		Collections.sort(al);
+		
+		sb.append(al.get(0)+"\n");
+		for(int i = 1; i < n; i++)
+			if(al.get(i-1) != al.get(i))
+				sb.append(al.get(i)+"\n");
+		bw.write(sb.toString());
+		
+		bw.flush();
 	}
 }
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//
-//public class Main {
-//
-//    public static void main(String[] args) throws IOException {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        boolean[] a = new boolean[2000001];
-//        int n = Integer.parseInt(br.readLine());
-//
-//        for(int i=0; i<n; i++)
-//            a[Integer.parseInt(br.readLine()) + 1000000] = true;
-//
-//        StringBuilder sb = new StringBuilder();
-//
-//        for(int i=0; i<=2000000; i++)
-//            if(a[i])
-//                sb.append((i - 1000000) + "\n");
-//
-//        System.out.print(sb);
-//
-//    }
-//}
