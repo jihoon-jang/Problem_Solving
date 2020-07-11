@@ -12,12 +12,14 @@ public class p11651 {
 		}
 		
 		Arrays.sort(array, new Comparator<int[]>() {
-			
-			public int compare(int x[], int y[]) {
-				if(x[1] == y[1])
-					return x[0] - y[0];
-				return Integer.compare(x[1], y[1]);
+
+			@Override
+			public int compare(int[] arg0, int[] arg1) {
+				if(arg0[1] == arg1[1])
+					return arg0[0] - arg1[0];
+				return arg0[1] - arg1[1];
 			}
+			
 		});
 		
 		for(int i = 0; i < n; i++) {

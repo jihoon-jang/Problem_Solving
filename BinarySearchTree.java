@@ -1,4 +1,3 @@
-package com.example.lib;
 
 public class BinarySearchTree {
     public static void main(String[] args) {
