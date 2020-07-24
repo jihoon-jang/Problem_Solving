@@ -20,11 +20,10 @@ namespace _0724
                 for (int i = 4; i <= n; i++)
                 {
                     dp[i] = dp[i - 1] + 1;
-                    if (dp[i] % 3 == 0)
-                        dp[i] = dp[i / 3] + 1;
-                    Console.WriteLine(dp[5]);
-                    if (dp[i] % 2 == 0)
-                        dp[i] = dp[i / 2] + 1;
+                    if (i % 3 == 0)
+                        dp[i] = Math.Min(dp[i / 3] + 1, dp[i]);
+                    if (i % 2 == 0)
+                        dp[i] = Math.Min(dp[i / 2] + 1, dp[i]);
                 }
 
             Console.WriteLine(dp[n]);
