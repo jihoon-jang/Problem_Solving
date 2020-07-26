@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp4
+namespace bj
 {
     class p9019
     {
@@ -42,7 +42,7 @@ namespace ConsoleApp4
                     {
                         String answer = com.ToString();
                         for (int i = 0; i < answer.Length; i++)
-                            Console.Write(c[answer[i]-'0']);
+                            Console.Write(c[answer[i] - '0']);
                         Console.WriteLine();
                         break;
                     }
