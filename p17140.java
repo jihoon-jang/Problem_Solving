@@ -19,7 +19,7 @@ public class p17140 {
 			for(int j = 0; j < 3; j++)
 				map[i][j] = Integer.parseInt(stz.nextToken());
 		}
-		
+
 		cal();
 	}
 
@@ -32,13 +32,12 @@ public class p17140 {
 		while(map[r-1][c-1] != k) {
 			if(answer == 101)
 				break;
-			
+
 			if(xNum >= yNum) {
 				for(int i = 0; i < xNum; i++) {
 					hashMap.clear();
 					pq.clear();
-					clear(true, i);
-					
+
 					for(int j = 0; j < yNum; j++) {
 						int now = map[i][j];
 						if(now == 0)
@@ -48,24 +47,25 @@ public class p17140 {
 						else
 							hashMap.put(now, 1);
 					}
-					 it = hashMap.keySet().iterator();
+					clear(true, i);
+					it = hashMap.keySet().iterator();
 
 					while(it.hasNext()){
 						int key = (int)it.next();
 						pq.add(new Node(key, hashMap.get(key)));
 					}
-					
+
 					int index = 0;
 					while(!pq.isEmpty()) {
 						if(index == 100)
 							break;
-						
+
 						Node node = pq.poll();
 						int number = node.number;
 						int count = node.count;
 						map[i][index++] = number;
 						map[i][index++] = count;
-						
+
 						if(index > yNum)
 							yNum = index;
 					}
@@ -75,8 +75,7 @@ public class p17140 {
 				for(int i = 0; i < yNum; i++) {
 					hashMap.clear();
 					pq.clear();
-					clear(false, i);
-					
+
 					for(int j = 0; j < xNum; j++) {
 						int now = map[j][i];
 						if(now == 0)
@@ -86,25 +85,25 @@ public class p17140 {
 						else
 							hashMap.put(now, 1);
 					}
-					
+					clear(false, i);
 					it = hashMap.keySet().iterator();
-					
+
 					while(it.hasNext()){
 						int key = (int)it.next();
 						pq.add(new Node(key, hashMap.get(key)));
 					}
-					
+
 					int index = 0;
 					while(!pq.isEmpty()) {
 						if(index == 100)
 							break;
-						
+
 						Node node = pq.poll();
 						int number = node.number;
 						int count = node.count;
 						map[index++][i] = number;
 						map[index++][i] = count;
-						
+
 						if(index > xNum)
 							xNum = index;
 					}
@@ -114,7 +113,7 @@ public class p17140 {
 		}
 		System.out.println(answer > 100 ? -1 : answer);
 	}
-	
+
 	public static void clear(boolean x, int line) {
 		if(x) {
 			for(int i = 0; i < 100; i++)
