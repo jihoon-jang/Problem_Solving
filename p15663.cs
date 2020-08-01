@@ -1,51 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Text;
 
-class p15663
+namespace bj
 {
-    static SortedSet<string> set = new SortedSet<string>();
-    static int n, m;
-    static int[] array;
-    static bool[] visit;
-    static void Main()
+    class p15663
     {
-        String[] s = Console.ReadLine().Split(' ');
-        n = int.Parse(s[0]);
-        m = int.Parse(s[1]);
-        array = new int[n];
-        visit = new bool[n];
-        s = Console.ReadLine().Split(' ');
-
-        for (int i = 0; i < n; i++)
-            array[i] = int.Parse(s[i]);
-
-        Array.Sort(array);
-        func(0, "");
-
-        for (int i = 0; i < set.Count; i++)
-            Console.WriteLine(set.ToImmutableArray()[i]);
-    }
-
-    static void func(int length, String s)
-    {
-        if (length == m)
+        static SortedSet<string> set = new SortedSet<string>();
+        static int n, m;
+        static int[] array;
+        static bool[] visit;
+        static void Main()
         {
-            set.Add(s.Trim());
-            return;
-        }
-        else
-        {
+            String[] s = Console.ReadLine().Split(' ');
+            n = int.Parse(s[0]);
+            m = int.Parse(s[1]);
+            array = new int[n];
+            visit = new bool[n];
+            s = Console.ReadLine().Split(' ');
+
             for (int i = 0; i < n; i++)
+                array[i] = int.Parse(s[i]);
+
+            Array.Sort(array);
+            func(0, "");
+
+            for (int i = 0; i < set.Count; i++)
+                Console.WriteLine(set.ToImmutableArray()[i]);
+        }
+
+        static void func(int length, String s)
+        {
+            if (length == m)
             {
-                if (!visit[i])
+                set.Add(s.Trim());
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
                 {
-                    visit[i] = true;
-                    func(length + 1, s + array[i] + " ");
-                    visit[i] = false;
+                    if (!visit[i])
+                    {
+                        visit[i] = true;
+                        func(length + 1, s + array[i] + " ");
+                        visit[i] = false;
+                    }
                 }
             }
         }
     }
-}
 
+
+}
