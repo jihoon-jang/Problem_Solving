@@ -1,59 +1,73 @@
-import java.util.*;
-import java.io.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class p1339 {
-	static int n, max = 0;
+	static int n, alphabet[], max = 0;
 	static String line[];
-	static HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-	static boolean[] visit;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		init();
-		value();
-		cal();
+		score(0,0);
 		System.out.println(max);
 	}
 
-	public static void cal() {
-		List<Character> list = new ArrayList<>(map.keySet());
-		list.sort(new Comparator<Character>() {
-			@Override
-			public int compare(Character o1, Character o2) {
-				// TODO Auto-generated method stub
-				return map.get(o2).compareTo(map.get(o1));
+	public static boolean check() {
+		boolean check[] = new boolean[10];
+		for(int i = 0; i < 26; i++) {
+			int value;
+			value = alphabet[i];
+			if(value != -1) {
+				if(check[value])
+					return false;
+				else
+					check[value] = true;
 			}
-
-		});
-		Iterator it = list.listIterator();
-		int value = 9;
-		while(it.hasNext()) {
-			max += map.get(it.next()) * value--;
 		}
+		return true;
 	}
 
-	public static void value() {
+	public static void cal() {
+		int answer = 0;
 		for(int i = 0; i < n; i++) {
 			String s = line[i];
+			int temp = 0;
 			int count = 0;
 			for(int j = s.length()-1; j >= 0; j--) {
-				char ch = line[i].charAt(j);
-				map.put(ch, map.get(ch)+(int)Math.pow(10, count++));
+				temp += alphabet[s.charAt(j)-'A']*Math.pow(10, count++);
+			}
+			answer += temp;
+		}
+
+		max = Math.max(answer, max);
+	}
+
+	public static void score(int li, int th) {
+		if(line.length-1 == li && line[line.length-1].length()-1 == th) {
+			if(check()) {
+				cal();
+			}
+			return;
+		}
+		else {
+			for(int i = 9; i >= 0; i--) {
+				alphabet[line[li].charAt(th) - 'A'] = i;
+
+				if(line[li].length()-1 != th)
+					score(li, th+1);
+				else
+					score(li+1, 0);
 			}
 		}
 	}
 
-	public static void init() throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		n = Integer.parseInt(br.readLine());
+	public static void init() {
+		Scanner in = new Scanner(System.in);
+		n = Integer.parseInt(in.nextLine());
+		alphabet = new int[26];
+		Arrays.fill(alphabet, -1);
 		line = new String[n];
-
-		for(int i = 0; i < n; i++) {
-			line[i] = br.readLine();
-			for(int j = 0; j < line[i].length(); j++) {
-				char ch = line[i].charAt(j);
-				map.put(ch, 0);
-			}
-		}
+		for(int i = 0; i < n; i++)
+			line[i] = in.nextLine();
 	}
 
 }

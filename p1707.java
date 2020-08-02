@@ -48,27 +48,19 @@ public class p1707 {
 				for(int j = 0; j < al[now].size(); j++) {
 					if(visit[al[now].get(j)] == 0) {
 						q.add(al[now].get(j));
-
-						if(visit[al[now].get(j)] == visit[now]) {
-							System.out.println("NO");
-							return;
-						}
-
-						if(visit[now] == 1)
-							visit[al[now].get(j)] = 2;
-						else
-							visit[al[now].get(j)] = 1;
 					}
+					
+					if(visit[al[now].get(j)] == visit[now]) {
+						System.out.println("NO");
+						return;
+					}
+
+					if(visit[now] == 1 && visit[al[now].get(j)] == 0)
+						visit[al[now].get(j)] = 2;
+					else if(visit[now] == 2 && visit[al[now].get(j)] == 0)
+						visit[al[now].get(j)] = 1;
 				}
 			}
-		}
-
-		for(int i = 1; i <= v; i++) {
-			for(int j = 0; j < al[i].size(); j++)
-				if(visit[i] == visit[al[i].get(j)]) {
-					System.out.println("NO");
-					return;
-				}
 		}
 
 		System.out.println("YES");
