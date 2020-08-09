@@ -2,48 +2,56 @@ import java.util.*;
 import java.io.*;
 
 public class p10973 {
-	static String str = "";
-	static String answer;
-	static boolean visit[], flag = false;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer stz = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(stz.nextToken());
 		int array[] = new int[n];
-		answer = br.readLine();
-		stz = new StringTokenizer(answer);
-		visit = new boolean[n];
-
-		for(int i = 0; i < n; i++)
-			array[i] = Integer.parseInt(stz.nextToken());
-		Arrays.sort(array);
-		dfs(0, n, str, array);
-	}
-
-	public static void dfs(int length, int n, String s, int array[]) {
-		if(flag)
-			return;
-		if(length == n) {
-			if(s.trim().equals(answer)) {
-				if(str.length() > 0)
-					System.out.println(str);
-				else
-					System.out.println(-1);
-				flag = true;
-				return;
-			}
-			str = s;
-			return;
-		}
-
+		
+			stz = new StringTokenizer(br.readLine());
 		for(int i = 0; i < n; i++) {
-			if(!visit[i]) {
-				visit[i] = true;
-				dfs(length +1, n, s + array[i] +" ", array);
-				visit[i] = false;
-			}
+			array[i] = Integer.parseInt(stz.nextToken());
 		}
+		
+		if(per(array)) 
+			for(int i = 0; i < array.length; i++)
+				System.out.print(array[i]+" ");
+		else
+			System.out.println(-1);
+	}
+	
+	public static boolean per(int array[]) {
+		int index = array.length-1;
+	
+		while(index > 0 && array[index] >= array[index-1]) 
+			index--;
+
+		if(index <= 0)
+			return false;
+		
+		int jndex = array.length-1;
+		
+		while(array[index-1] <= array[jndex]) 
+			jndex--;
+		
+		int temp = array[index-1];
+		array[index-1] = array[jndex];
+		array[jndex] = temp;
+		
+		int start = index;
+		int end = array.length-1;
+		
+		while(start < end) {
+			temp = array[start];
+			array[start] = array[end];
+			array[end] = temp;
+			end--;
+			start++;
+		}
+		
+		return true;
+		
 	}
 
 }
