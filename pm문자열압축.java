@@ -8,11 +8,12 @@ public class pm문자열압축 {
 
 	public static int solution(String s) {
 		int min = s.length();
+		
 		for(int i = 1; i <= s.length()/2; i++) {
 			StringBuilder sb = new StringBuilder();
-			
 			String temp = "";
 			int count = 1;
+			
 			for(int j = 0; j < Math.ceil((double)s.length()/i); j++) {
 				String now = s.substring(j*i, i*(j+1) >= s.length() ? s.length() : i*(j+1));
 				if(!temp.equals(now)) {
