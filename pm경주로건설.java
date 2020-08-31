@@ -15,12 +15,11 @@ public class Solution {
 		this.map = map;
 		answer = Integer.MAX_VALUE;
 		value = new int[4][n][n];
-		
+
 		for(int i = 0; i < 4; i++) 
 			value[i][0][0] = 1;
-
-		drive();
 		
+		drive();
 		for(int i = 0; i < 4; i++) 
 			answer = Math.min(answer, value[i][n-1][n-1] == 0 ? Integer.MAX_VALUE : value[i][n-1][n-1]);
 
@@ -34,6 +33,7 @@ public class Solution {
 		while(!q.isEmpty()) {
 			Car now = q.poll();
 			
+
 			if(now.x == n-1 && now.y == n-1) {
 				continue;
 			}
@@ -42,7 +42,7 @@ public class Solution {
 				int nx = now.x + dx[i];
 				int ny = now.y + dy[i];
 
-				if(check(nx, ny) && (value[i][nx][ny] == 0 || value[i][nx][ny] > now.cost)) {
+				if(check(nx, ny) && map[nx][ny] == 0 && (value[i][nx][ny] == 0 || value[i][nx][ny] > now.cost)) {
 					if(now.dir == -1) {
 						value[i][nx][ny] = 100;
 						q.add(new Car(nx, ny, i, 100));
@@ -94,7 +94,7 @@ public class Solution {
 					}				
 				}
 			}
-			
+
 			return 0;
 		}
 	}
