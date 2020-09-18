@@ -6,8 +6,8 @@ public class p19236 {
     public static int N = 4;
     public static int answer = 0;
     /*↑, ↖, ←, ↙, ↓, ↘, →, ↗*/
-    public static int dx[] = {-1, -1, 0, 1, 1, 1, 0, -1};
-    public static int dy[] = {0, -1, -1, -1, 0, 1, 1, 1};
+    public static int dx[] = {0,-1, -1, 0, 1, 1, 1, 0, -1};
+    public static int dy[] = {0,0, -1, -1, -1, 0, 1, 1, 1};
     public static Fish shark;
     public static Fish fish[] = new Fish[17];
     
@@ -45,8 +45,8 @@ public class p19236 {
         int sX = shark.x;
         int sY = shark.y;
         for(int i = 1; i <= 3; i++) {
-            int x = shark.x + dx[shark.direction - 1 == -1 ? 7 : shark.direction] * i;
-            int y = shark.y + dy[shark.direction - 1 == -1 ? 7 : shark.direction] * i;
+            int x = shark.x + dx[shark.direction] * i;
+            int y = shark.y + dy[shark.direction] * i;
     
             if(x >= 0 && y >= 0 && x < N && y < N && map[x][y] != 0 && fish[map[x][y]].number != 0) {
                 Fish feed = fish[map[x][y]];
@@ -57,8 +57,6 @@ public class p19236 {
                 shark.x = x;
                 shark.y = y;
                 answer = Math.max(shark.number, answer);
-                print(map);
-                System.out.println();
                 move();
                 start();
                 for(int a = 1; a <= 16; a++)
@@ -85,11 +83,14 @@ public class p19236 {
         for(int i = 1; i <= 16; i++) {
             if(fish[i].number != 0) {
                 Fish now = fish[i];
-                for(int j = 0; j < 8; j++) {
+                now.direction--;
+                for(int j = 0; j < 9; j++) {
                     now.direction++;
-                    now.direction %= 8;
-                    int x = now.x + dx[(now.direction - 1) == -1 ? 7 : now.direction];
-                    int y = now.y + dy[(now.direction - 1) == -1 ? 7 : now.direction];
+                    now.direction %= 9;
+                    if(now.direction == 0)
+                        now.direction = 1;
+                    int x = now.x + dx[now.direction];
+                    int y = now.y + dy[now.direction];
                     
                     if(check(x, y)) {
                         if(map[x][y] == 0) {
