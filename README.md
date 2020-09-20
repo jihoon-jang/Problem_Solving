@@ -1,4 +1,5 @@
-# BOJ
+# Problem_Solving
+
 ## 1 Day 1 Commit!
 
 - [백준](https://www.acmicpc.net/), [프로그래머스](https://programmers.co.kr/learn/challenges?tab=all_challenges)를 풀고 통과한 코드를 올렸습니다. 
