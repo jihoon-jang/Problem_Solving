@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -9,7 +8,7 @@ public class p5427 {
     
     static int w, h;
     static char map[][];
-    static LinkedList<Point> fire;
+    static Queue<Point> fire;
     static int dx[] = {-1,1,0,0};
     static int dy[] = {0,0,-1,1};
     static boolean visit[][];
@@ -19,6 +18,7 @@ public class p5427 {
         StringTokenizer stz;
         sb = new StringBuilder();
         int tc = Integer.parseInt(br.readLine());
+        int x = 0, y = 0;
         
         for(int t = 0; t < tc; t++) {
             stz = new StringTokenizer(br.readLine());
@@ -27,7 +27,6 @@ public class p5427 {
             map = new char[h][w];
             fire = new LinkedList<>();
             
-            int x = 0, y = 0;
             for(int i = 0; i < h; i++) {
                 String line = br.readLine();
                 for(int j = 0; j < w; j++) {
@@ -83,26 +82,20 @@ public class p5427 {
     }
     
     public static void burn() {
-        Iterator it = fire.iterator();
-        Queue<Point> q = new LinkedList<>();
+        int size = fire.size();
         
-        while(it.hasNext()) {
-            Point now = (Point) it.next();
+        for(int s = 0; s < size; s++) {
+            Point now = fire.poll();
             
             for(int i = 0; i < 4; i++) {
                 int nx = now.x + dx[i];
                 int ny = now.y + dy[i];
                 
-                if(nx >= 0 && ny >= 0 && nx < h && ny < w && map[nx][ny] != '#') {
-                    q.offer(new Point(nx, ny));
+                if(nx >= 0 && ny >= 0 && nx < h && ny < w && (map[nx][ny] == '.' || map[nx][ny] == '@')) {
+                    fire.offer(new Point(nx, ny));
                     map[nx][ny] = '*';
                 }
             }
-        }
-        
-        while(!q.isEmpty()) {
-            Point now = q.poll();
-            fire.add(now);
         }
     }
     
