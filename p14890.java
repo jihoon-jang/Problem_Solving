@@ -1,155 +1,99 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class p14890 {
-	static int map[][];
-	static int n, l, answer = 0;
-	static boolean visit[][];
-
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		n = in.nextInt(); l = in.nextInt();
+	
+	static int n, l, answer, map[][];
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer stz = new StringTokenizer(br.readLine());
+		n = Integer.parseInt(stz.nextToken());
+		l = Integer.parseInt(stz.nextToken());
+		answer = 0;
 		map = new int[n][n];
-		for(int i = 0; i < n; i++)
+		for(int i = 0; i < n; i++) {
+			stz = new StringTokenizer(br.readLine());
 			for(int j = 0; j < n; j++)
-				map[i][j] = in.nextInt();
-
-		visit = new boolean[n][n];
-		for(int i = 0; i < n; i++)
-			searchx(i);
-		visit = new boolean[n][n];
-		for(int i = 0; i < n; i++)
-			searchy(i);
-
+				map[i][j] = Integer.parseInt(stz.nextToken());
+		}
+		
+		searchX();
+		searchY();
 		System.out.println(answer);
 	}
-
-	public static void searchy(int line) {
-		int temp = 0;
-		int number = map[0][line];
+	
+	public static void searchX() {
 		for(int i = 0; i < n; i++) {
-			if(number > map[i][line]+1)
-				return;
-			if(number == map[i][line])
-				temp++;
-			else if(number > map[i][line]){
-				temp = 0;
-				number = map[i][line];
-				if(i+l-1 > n-1)
-					return;
-				for(int j = 0; j < l; j++) {
-					if(number == map[i+j][line]) {
-						if(visit[i+j][line])
-							return;
-						visit[i+j][line] = true;
-						temp++;
-					}
-					else
-						return;
+			int count = 1;
+			int value = map[i][0];
+			boolean path = true;
+			for(int j = 1; j < n; j++) {
+				int now = map[i][j];
+				if(now == value)
+					count++;
+				else if(count < 0) {
+					path = false;
+					break;
 				}
-				i += l-1;
-			}
-			else {
-				temp = 1;
-				number = map[i][line];
-			}
-		}	
-		
-		temp = 0;
-		number = map[n-1][line];
-		for(int i = n-1; i >= 0; i--) {
-			if(number+1 < map[i][line])
-				return;
-			if(number == map[i][line])
-				temp++;
-			else if(number > map[i][line]){
-				temp = 0;
-				number = map[i][line];
-				if(i-l+1 < 0)
-					return;
-				for(int j = 0; j < l; j++) {
-					if(number == map[i-j][line]) {
-						if(visit[i-j][line])
-							return;
-						visit[i-j][line] = true;
-						temp++;
-					}
-					else 
-						return;
+				else if(Math.abs(now - value) > 1) {
+					path = false;
+					break;
 				}
-				i -= l-1;
+				else if(now > value) {
+						if(count >= l) {
+							value = now;
+							count = 1;
+						}
+						else {
+							path = false;
+							break;
+						}
+					}
+					else {
+						count = -l+1;
+						value = now;
+					}
 			}
-			else {
-				temp = 1;
-				number = map[i][line];
-			}
-
+			if(path && count >= 0)
+				answer++;
 		}
-		answer ++;
-		
 	}
-
-	public static void searchx(int line) {
-		int temp = 0;
-		int number = map[line][0];
+	
+	public static void searchY() {
 		for(int i = 0; i < n; i++) {
-			if(number > map[line][i]+1)
-				return;
-			if(number == map[line][i])
-				temp++;
-			else if(number > map[line][i]){
-				temp = 0;
-				number = map[line][i];
-				if(i+l-1 > n-1)
-					return;
-				for(int j = 0; j < l; j++) {
-					if(number == map[line][i+j]) {
-						if(visit[line][i+j])
-							return;
-						visit[line][i+j] = true;
-						temp++;
-					}
-					else
-						return;
+			int count = 1;
+			int value = map[0][i];
+			boolean path = true;
+			for(int j = 1; j < n; j++) {
+				int now = map[j][i];
+				if(now == value)
+					count++;
+				else if(count < 0) {
+					path = false;
+					break;
 				}
-				i += l-1;
-			}
-			else {
-				temp = 1;
-				number = map[line][i];
-			}
-		}	
-
-		temp = 0;
-		number = map[line][n-1];
-		for(int i = n-1; i >= 0; i--) {
-			if(number+1 < map[line][i])
-				return;
-			if(number == map[line][i])
-				temp++;
-			else if(number > map[line][i]){
-				temp = 0;
-				number = map[line][i];
-				if(i-l+1 < 0)
-					return;
-				for(int j = 0; j < l; j++) {
-					if(number == map[line][i-j]) {
-						if(visit[line][i-j])
-							return;
-						visit[line][i-j] = true;
-						temp++;
-					}
-					else 
-						return;
+				else if(Math.abs(now - value) > 1) {
+					path = false;
+					break;
 				}
-				i -= l-1;
+				else if(now > value) {
+						if(count >= l) {
+							value = now;
+							count = 1;
+						}
+						else {
+							path = false;
+							break;
+						}
+					}
+					else {
+						count = -l+1;
+						value = now;
+					}
 			}
-			else {
-				temp = 1;
-				number = map[line][i];
-			}
+			if(path && count >= 0)
+				answer++;
 		}
-
-		answer ++;
 	}
-
 }
