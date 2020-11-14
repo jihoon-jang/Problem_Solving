@@ -5,12 +5,11 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class p2636 {
-    
+    //BFS이용
     public static int row, col;
     public static int map[][];
     public static int dx[] = {-1,1,0,0};
     public static int dy[] = {0,0,-1,1};
-    
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer stz = new StringTokenizer(br.readLine());
@@ -38,6 +37,7 @@ public class p2636 {
         System.out.println(time + "\n" + cheese);
     }
     
+    //주변에 공기가 있으면 녹음
     public static void melt() {
         int copy[][] = new int[row][col];
         for(int i = 0; i < row; i++)
@@ -68,6 +68,7 @@ public class p2636 {
         return count;
     }
     
+    //공기 2로 바꿔줌
     public static void air() {
         boolean visit[][] = new boolean[row][col];
         map[0][0] = 2;
