@@ -34,7 +34,7 @@ public class p3860 {
             int e = Integer.parseInt(br.readLine());
             list = new LinkedList<>();
             dist = new long[w][h];
-            int index = 1;
+            
             for(int i = 0; i < e; i++) {
                 stz = new StringTokenizer(br.readLine());
                 int x1 = Integer.parseInt(stz.nextToken());
@@ -42,6 +42,7 @@ public class p3860 {
                 int x2 = Integer.parseInt(stz.nextToken());
                 int y2 = Integer.parseInt(stz.nextToken());
                 int t = Integer.parseInt(stz.nextToken());
+                map[x1][y1] = 1;
                 list.add(new Edge(new Point(x1, y1), new Point(x2, y2), t));
             }
             
@@ -63,27 +64,20 @@ public class p3860 {
     }
     
     public static void searchPath() {
-        Queue<Point> q = new LinkedList<>();
-        Queue<Integer> countQ = new LinkedList<>();
-        boolean visit[][] = new boolean[w][h];
-        q.offer(new Point(0, 0));
-        countQ.offer(0);
-        visit[0][0] = true;
-        
-        while(!q.isEmpty()) {
-            Point now = q.poll();
-            
-            if(now.x == w-1 && now.y == h-1)
-                continue;
-            
-            for(int k = 0; k < 4; k++) {
-                int nx = now.x + dx[k];
-                int ny = now.y + dy[k];
+        for(int i = 0; i < w; i++) {
+            for(int j = 0; j < h; j++) {
+                if(i == w-1 && j == h-1)
+                    continue;
+                if(map[i][j] != 0)
+                    continue;
                 
-                if(check(nx, ny) && map[nx][ny] != -1 && !visit[nx][ny]) {
-                    visit[nx][ny] = true;
-                    q.offer(new Point(nx, ny));
-                    list.add(new Edge(new Point(now.x, now.y), new Point(nx ,ny), 1));
+                for(int k = 0; k < 4; k++) {
+                    int nx = i + dx[k];
+                    int ny = j + dy[k];
+                    
+                    if(check(nx, ny) && map[nx][ny] != -1) {
+                        list.add(new Edge(new Point(i, j), new Point(nx ,ny), 1));
+                    }
                 }
             }
         }
