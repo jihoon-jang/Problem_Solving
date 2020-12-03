@@ -22,7 +22,7 @@ public class p2609 {
 		}
 		int lsb=1;
 		lsb = n1/gcb*n2;
-		System.out.println(gcb + " \n"+ lsb);
+		System.out.println(gcb + "\n"+ lsb);
 	}
 
 }
