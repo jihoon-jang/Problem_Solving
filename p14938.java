@@ -3,6 +3,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class p14938 {
+    
     static int item[], weight[];
     static LinkedList<Edge> list[];
     public static void main(String[] args) throws Exception {
@@ -29,13 +30,13 @@ public class p14938 {
         }
         
         int max = 0;
-        int count = 0;
+        int count;
         for(int i = 1; i <= n; i++) {
             count = 0;
             Arrays.fill(weight, -1);
             dijkstra(i);
             for(int j = 1; j <= n; j++)
-                if(weight[j] <= m)
+                if(weight[j] <= m && weight[j] != -1)
                     count += item[j];
     
             max = Math.max(max, count);
@@ -75,7 +76,7 @@ public class p14938 {
         int v, w;
         
         Edge(int v, int w) {
-            this.v = v;;
+            this.v = v;
             this.w = w;
         }
     }
