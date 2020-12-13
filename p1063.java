@@ -36,11 +36,19 @@ public class p1063 {
             int mx = sx + move[0];
             int my = sy + move[1];
             
-            if(check(nx, ny) && check(mx, my)) {
-                kx = nx;
-                ky = ny;
-                sx = mx;
-                sy = my;
+            if(nx == sx && ny == sy) {
+                if(check(nx, ny) && check(mx, my)) {
+                    kx = nx;
+                    ky = ny;
+                    sx = mx;
+                    sy = my;
+                }
+            }
+            else {
+                if(check(nx, ny)) {
+                    kx = nx;
+                    ky = ny;
+                }
             }
         }
         System.out.println((char)(ky+'A') + "" + (kx+1) + "\n" + (char)(sy+'A') + "" + (sx+1));
